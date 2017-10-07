@@ -1,7 +1,10 @@
 package com.matsyuk.authcase.di;
 
+import android.content.Context;
+
 import com.matsyuk.authcase.di.app.AppComponent;
 import com.matsyuk.authcase.di.app.DaggerAppComponent;
+import com.matsyuk.authcase.di.app.PinModule;
 
 /**
  * @author e.matsyuk
@@ -24,8 +27,10 @@ public class ComponentManager {
 
     private ComponentManager() {}
 
-    public void initAppComponent() {
-        appComponent = DaggerAppComponent.builder().build();
+    public void initAppComponent(Context context) {
+        appComponent = DaggerAppComponent.builder()
+                .pinModule(new PinModule(context))
+                .build();
     }
 
     public AppComponent getAppComponent() {

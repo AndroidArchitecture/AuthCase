@@ -1,5 +1,8 @@
 package com.matsyuk.authcase.repositories.main;
 
+import android.support.annotation.NonNull;
+
+import com.matsyuk.authcase.domain.main.PinCodeListener;
 import com.matsyuk.authcase.domain.main.SomeModel;
 
 import io.reactivex.Single;
@@ -9,4 +12,6 @@ import io.reactivex.Single;
  */
 public interface AuthRepository {
     Single<SomeModel> getData();
+    void subscribePinCodeNeedUpdate(PinCodeListener pinCodeListener);
+    void updatePinCode(@NonNull String newPinCode);
 }

@@ -1,5 +1,6 @@
 package com.matsyuk.authcase.di.app;
 
+import com.matsyuk.authcase.data.auth.AuthHolder;
 import com.matsyuk.authcase.data.auth_network.AuthApi;
 import com.matsyuk.authcase.repositories.main.AuthRepository;
 import com.matsyuk.authcase.repositories.main.AuthRepositoryImpl;
@@ -17,8 +18,8 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public AuthRepository provideSomeRepository(AuthApi authApi) {
-        return new AuthRepositoryImpl(authApi);
+    public AuthRepository provideSomeRepository(AuthApi authApi, AuthHolder authHolder) {
+        return new AuthRepositoryImpl(authApi, authHolder);
     }
 
 }
