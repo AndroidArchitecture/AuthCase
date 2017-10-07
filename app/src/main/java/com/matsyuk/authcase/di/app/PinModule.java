@@ -30,6 +30,8 @@ public class PinModule {
         return new PinInteractorImpl(context, authRepository);
     }
 
+    // This app is example. That's why we simplified presentation layer
+    // And we make Presenter with @Singleton scope
     @Singleton
     @Provides
     public PinPresenter providePinPresenter(PinInteractor pinInteractor) {
