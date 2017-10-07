@@ -1,8 +1,7 @@
-package com.matsyuk.authcase.di.main;
-
-import android.support.annotation.NonNull;
+package com.matsyuk.authcase.di.app;
 
 import com.matsyuk.authcase.data.auth.AuthHolder;
+import com.matsyuk.authcase.data.common_network.CommonApi;
 
 import javax.inject.Singleton;
 
@@ -16,10 +15,9 @@ import dagger.Provides;
 public class AuthModule {
 
     @Provides
-    @NonNull
     @Singleton
-    public AuthHolder provideAuthHolder() {
-        return new AuthHolder();
+    public AuthHolder provideAuthHolder(CommonApi commonApi) {
+        return new AuthHolder(commonApi);
     }
 
 }

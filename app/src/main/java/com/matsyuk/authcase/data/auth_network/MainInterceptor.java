@@ -1,4 +1,4 @@
-package com.matsyuk.authcase.data.network;
+package com.matsyuk.authcase.data.auth_network;
 
 import com.matsyuk.authcase.data.auth.AuthHolder;
 
@@ -14,6 +14,7 @@ import okhttp3.Response;
 public class MainInterceptor implements Interceptor {
 
     private static final String ACCESS_TOKEN_HEADER = "Access-Token";
+
     private AuthHolder authHolder;
 
     public MainInterceptor(AuthHolder authHolder) {

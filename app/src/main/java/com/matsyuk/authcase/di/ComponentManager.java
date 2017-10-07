@@ -1,7 +1,7 @@
 package com.matsyuk.authcase.di;
 
-import com.matsyuk.authcase.di.main.DaggerMainComponent;
-import com.matsyuk.authcase.di.main.MainComponent;
+import com.matsyuk.authcase.di.app.AppComponent;
+import com.matsyuk.authcase.di.app.DaggerAppComponent;
 
 /**
  * @author e.matsyuk
@@ -9,7 +9,7 @@ import com.matsyuk.authcase.di.main.MainComponent;
 public class ComponentManager {
 
     private static volatile ComponentManager instance;
-    private MainComponent mainComponent;
+    private AppComponent appComponent;
 
     public static ComponentManager getInstance() {
         if (instance == null) {
@@ -24,12 +24,12 @@ public class ComponentManager {
 
     private ComponentManager() {}
 
-    public void initMainComponent() {
-        mainComponent = DaggerMainComponent.builder().build();
+    public void initAppComponent() {
+        appComponent = DaggerAppComponent.builder().build();
     }
 
-    public MainComponent getMainComponent() {
-        return mainComponent;
+    public AppComponent getAppComponent() {
+        return appComponent;
     }
 
 }

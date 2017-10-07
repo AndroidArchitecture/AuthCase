@@ -7,6 +7,6 @@ import io.reactivex.Single;
 /**
  * @author e.matsyuk
  */
-public interface SomeRepository {
+public interface AuthRepository {
     Single<SomeModel> getData();
 }

@@ -1,11 +1,9 @@
-package com.matsyuk.authcase.di.main;
-
-import android.support.annotation.NonNull;
+package com.matsyuk.authcase.di.app;
 
 import com.matsyuk.authcase.data.auth.AuthHolder;
-import com.matsyuk.authcase.data.network.MainAuthenticator;
-import com.matsyuk.authcase.data.network.MainInterceptor;
-import com.matsyuk.authcase.data.network.SomeApi;
+import com.matsyuk.authcase.data.auth_network.AuthApi;
+import com.matsyuk.authcase.data.auth_network.MainAuthenticator;
+import com.matsyuk.authcase.data.auth_network.MainInterceptor;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -21,25 +19,23 @@ import retrofit2.Retrofit;
  * @author e.matsyuk
  */
 @Module
-public class NetworkModule {
+public class AuthNetworkModule {
 
     @Provides
-    @NonNull
     @Singleton
     public Interceptor provideInterceptor(AuthHolder authHolder) {
         return new MainInterceptor(authHolder);
     }
 
     @Provides
-    @NonNull
     @Singleton
     public Authenticator provideAuthenticator(AuthHolder authHolder) {
         return new MainAuthenticator(authHolder);
     }
 
     @Provides
-    @NonNull
     @Singleton
+    @Named("auth")
     public OkHttpClient provideOkHttpClient(Interceptor interceptor, Authenticator authenticator) {
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
@@ -48,9 +44,9 @@ public class NetworkModule {
     }
 
     @Provides
-    @NonNull
     @Singleton
-    public Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+    @Named("auth")
+    public Retrofit provideRetrofit(@Named("auth") OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl("some_url")
                 .client(okHttpClient)
@@ -58,10 +54,9 @@ public class NetworkModule {
     }
 
     @Provides
-    @NonNull
     @Singleton
-    public SomeApi provideAccountService(@NonNull Retrofit retrofit) {
-        return retrofit.create(SomeApi.class);
+    public AuthApi provideAuthApi(@Named("auth") Retrofit retrofit) {
+        return retrofit.create(AuthApi.class);
     }
 
 }
