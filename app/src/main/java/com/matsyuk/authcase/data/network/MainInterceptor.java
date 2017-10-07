@@ -13,8 +13,8 @@ import okhttp3.Response;
  */
 public class MainInterceptor implements Interceptor {
 
-    private AuthHolder authHolder;
     private static final String ACCESS_TOKEN_HEADER = "Access-Token";
+    private AuthHolder authHolder;
 
     public MainInterceptor(AuthHolder authHolder) {
         this.authHolder = authHolder;

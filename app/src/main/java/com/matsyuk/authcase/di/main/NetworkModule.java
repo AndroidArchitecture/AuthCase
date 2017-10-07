@@ -3,6 +3,7 @@ package com.matsyuk.authcase.di.main;
 import android.support.annotation.NonNull;
 
 import com.matsyuk.authcase.data.auth.AuthHolder;
+import com.matsyuk.authcase.data.network.MainAuthenticator;
 import com.matsyuk.authcase.data.network.MainInterceptor;
 import com.matsyuk.authcase.data.network.SomeApi;
 
@@ -11,6 +12,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Authenticator;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -31,9 +33,17 @@ public class NetworkModule {
     @Provides
     @NonNull
     @Singleton
-    public OkHttpClient provideOkHttpClient(Interceptor interceptor) {
+    public Authenticator provideAuthenticator(AuthHolder authHolder) {
+        return new MainAuthenticator(authHolder);
+    }
+
+    @Provides
+    @NonNull
+    @Singleton
+    public OkHttpClient provideOkHttpClient(Interceptor interceptor, Authenticator authenticator) {
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
+                .authenticator(authenticator)
                 .build();
     }
 
