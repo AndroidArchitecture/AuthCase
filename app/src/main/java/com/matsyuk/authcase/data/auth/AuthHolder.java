@@ -1,7 +1,6 @@
 package com.matsyuk.authcase.data.auth;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.matsyuk.authcase.data.common_network.CommonApi;
 
@@ -14,14 +13,14 @@ public class AuthHolder {
 
     private CommonApi commonApi;
 
-    @Nullable
-    private volatile String token;
+    @NonNull
+    private volatile String token = "StartToken";
 
     public AuthHolder(CommonApi commonApi) {
         this.commonApi = commonApi;
     }
 
-    @Nullable
+    @NonNull
     public String getToken() {
         return token;
     }

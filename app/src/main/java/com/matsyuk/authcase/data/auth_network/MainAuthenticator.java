@@ -32,7 +32,7 @@ public class MainAuthenticator implements Authenticator {
 
         Request.Builder requestBuilder = response.request().newBuilder();
 
-        if (storedToken == null || storedToken.equals(requestToken)) {
+        if (storedToken.equals(requestToken)) {
             authHolder.refresh();
         }
 
