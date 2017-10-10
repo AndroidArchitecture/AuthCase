@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.matsyuk.authcase.di.app.AppComponent;
 import com.matsyuk.authcase.di.app.DaggerAppComponent;
-import com.matsyuk.authcase.di.app.PinModule;
+import com.matsyuk.authcase.di.app.NavigationModule;
 
 /**
  * @author e.matsyuk
@@ -29,7 +29,7 @@ public class ComponentManager {
 
     public void initAppComponent(Context context) {
         appComponent = DaggerAppComponent.builder()
-                .pinModule(new PinModule(context))
+                .navigationModule(new NavigationModule(context))
                 .build();
     }
 

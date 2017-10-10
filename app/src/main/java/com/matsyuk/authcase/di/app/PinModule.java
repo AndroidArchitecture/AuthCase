@@ -1,7 +1,5 @@
 package com.matsyuk.authcase.di.app;
 
-import android.content.Context;
-
 import com.matsyuk.authcase.domain.main.PinInteractor;
 import com.matsyuk.authcase.domain.main.PinInteractorImpl;
 import com.matsyuk.authcase.presentation.pincode.presenters.PinPresenter;
@@ -11,6 +9,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.terrakok.cicerone.Router;
 
 /**
  * @author e.matsyuk
@@ -18,16 +17,10 @@ import dagger.Provides;
 @Module
 public class PinModule {
 
-    private Context context;
-
-    public PinModule(Context context) {
-        this.context = context;
-    }
-
     @Singleton
     @Provides
-    public PinInteractor providePinInteractor(AuthRepository authRepository) {
-        return new PinInteractorImpl(context, authRepository);
+    public PinInteractor providePinInteractor(AuthRepository authRepository, Router router) {
+        return new PinInteractorImpl(authRepository, router);
     }
 
     // This app is example. That's why we simplified presentation layer

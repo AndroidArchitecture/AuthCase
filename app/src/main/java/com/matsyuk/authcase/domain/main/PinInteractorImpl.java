@@ -1,32 +1,29 @@
 package com.matsyuk.authcase.domain.main;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 
-import com.matsyuk.authcase.presentation.main.MainActivity;
+import com.matsyuk.authcase.GlobalNavigator;
 import com.matsyuk.authcase.repositories.main.AuthRepository;
+
+import ru.terrakok.cicerone.Router;
 
 /**
  * @author e.matsyuk
  */
 public class PinInteractorImpl implements PinInteractor {
 
-    // Context or Router
-    private Context context;
     private AuthRepository authRepository;
+    private Router router;
 
-    public PinInteractorImpl(Context context, AuthRepository authRepository) {
-        this.context = context;
+    public PinInteractorImpl(AuthRepository authRepository, Router router) {
         this.authRepository = authRepository;
+        this.router = router;
         subscribeToAuthRepos();
     }
 
     private void subscribeToAuthRepos() {
         authRepository.subscribePinCodeNeedUpdate(() -> {
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            router.navigateTo(GlobalNavigator.PIN_SCREEN);
         });
     }
 
