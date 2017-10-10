@@ -2,6 +2,8 @@ package com.matsyuk.authcase.di.app;
 
 import com.matsyuk.authcase.data.common_network.CommonApi;
 
+import java.util.concurrent.Executors;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -31,6 +33,7 @@ public class CommonNetworkModule {
         return new Retrofit.Builder()
                 .baseUrl("some_url")
                 .client(okHttpClient)
+                .callbackExecutor(Executors.newFixedThreadPool(3))
                 .build();
     }
 

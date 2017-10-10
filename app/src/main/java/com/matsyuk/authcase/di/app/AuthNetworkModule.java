@@ -5,6 +5,8 @@ import com.matsyuk.authcase.data.auth_network.AuthApi;
 import com.matsyuk.authcase.data.auth_network.MainAuthenticator;
 import com.matsyuk.authcase.data.auth_network.MainInterceptor;
 
+import java.util.concurrent.Executors;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -50,6 +52,7 @@ public class AuthNetworkModule {
         return new Retrofit.Builder()
                 .baseUrl("some_url")
                 .client(okHttpClient)
+                .callbackExecutor(Executors.newFixedThreadPool(3))
                 .build();
     }
 
