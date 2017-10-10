@@ -33,7 +33,7 @@ public class AuthHolder {
         return token;
     }
 
-    public synchronized void refresh() {
+    public void refresh() {
         pinCode = null;
         if (sessionListener != null) {
             sessionListener.sessionExpired();
@@ -53,7 +53,7 @@ public class AuthHolder {
                 .doOnSuccess(newToken -> token = newToken);
     }
 
-    public synchronized void updatePinCode(@NonNull String pinCode) {
+    public void updatePinCode(@NonNull String pinCode) {
         this.pinCode = pinCode;
         countDownLatch.countDown();
     }
